@@ -23,9 +23,17 @@
 
 
   Task Description:
+  Have your TWR wait for the button to be pushed then drive forward for one rotation of
+  the wheel. How far did the your TWR travel forward? How does this compare to the
+  circumference of the wheel?
 
 
   Pseudocode:
+  wait for button push
+  start both motors
+  continually check one of the encoders;
+  when it reaches a certain value, stop both motors
+  measure radius of a wheel; multiply by tau for circumference
 
 
 */
@@ -33,6 +41,12 @@
 task main()
 {                                     //Program begins, insert code within curly braces
 
-
+	while (true)
+	{
+		untilTouch(pushButton);
+		startMotor(leftMotor, 50);
+		startMotor(rightMotor, 50);
+		untilEncoderCounts(
+	}
 
 }

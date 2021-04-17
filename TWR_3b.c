@@ -23,9 +23,23 @@
 
 
   Task Description:
+  Use variables to program your TWR to turn on the yellow LED for one second and then
+  off for one second, repeat 10 times and then turn on the green LED for 0.5 seconds
+  and then off for 0.75 seconds, repeat 10 times.
 
 
   Pseudocode:
+  looks like instead of a for loop, we are supposed to do a while loop with a counter
+  first loop:
+    turn yellow LED on
+    wait 1 second
+    turn yellow LED off
+    wait 1 second
+  second loop:
+    turn green LED on
+    wait 0.l5 seconds
+    turn green LED off
+    wait 0.75 seconds
 
 
 */
@@ -33,6 +47,21 @@
 task main()
 {                                     //Program begins, insert code within curly braces
 
-
+    int counter = 0;
+    while (counter < 10) {
+        turnLEDOn(yellowLED);
+        wait(1);
+        turnLEDOff(yellowLED);
+        wait(1);
+        counter++;
+    }
+    counter = 0;
+    while (counter < 10) {
+        turnLEDOn(greenLED);
+        wait(0.15);
+        turnLEDOff(greenLED);
+        wait(0.75);
+        counter++;
+    }
 
 }

@@ -23,9 +23,25 @@
 
 
   Task Description:
+  Use an If Else statement to write a program so that the green Led will turn on and
+  stay on when the button is pressed and turn off when the button is not pressed. Then
+  at the same time if the potentiometer is less than 2500 the yellow LED will be on and
+  if the potentiometer is greater than or equal to 2500 the red LED will be on. This
+  program should run infinitely.
+
 
 
   Pseudocode:
+  event-checking loop
+    if the button is pressed
+      turn on the green LED
+    otherwise
+      turn off the green LED
+    if the potentiometer is less than 2500
+      turn the yellow LED on
+    otherwise
+      turn the yellow LED off
+    wait however long
 
 
 */
@@ -33,6 +49,20 @@
 task main()
 {                                     //Program begins, insert code within curly braces
 
-
+    while (true) {
+        if (SensorValue[pushButton] == 1) {
+            turnLEDOn(greenLED);
+        }
+        else {
+            turnLEDOff(greenLED);
+        }
+        if (SensorValue[potentiometer] <= 2500) {
+            turnLEDOn(yellowLED);
+        }
+        else {
+            turnLEDOff(yellowLED);
+        }
+        waitInMilliseconds(50); //the procedure runs 1000/50=20 times per second
+    }
 
 }

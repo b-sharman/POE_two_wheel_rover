@@ -53,7 +53,7 @@
 task turnRight()
 {
         startMotor(rightMotor, -60);
-        waitInMilliseconds(1325);
+        waitInMilliseconds(725);
         startMotor(rightMotor, 60);
 }
 

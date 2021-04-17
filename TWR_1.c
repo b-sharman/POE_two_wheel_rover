@@ -2,7 +2,7 @@
 #pragma config(Sensor, in2,    middleLineFollower, sensorLineFollower)
 #pragma config(Sensor, in3,    leftLineFollower, sensorLineFollower)
 #pragma config(Sensor, in4,    potentiometer,  sensorPotentiometer)
-#pragma config(Sensor, dgtl2,  sonarIn,        sensorSONAR_raw)
+#pragma config(Sensor, dgtl2,  sonarIn,        sensorSONAR_cm)
 #pragma config(Sensor, dgtl5,  pushButton,     sensorTouch)
 #pragma config(Sensor, dgtl6,  redLED,         sensorLEDtoVCC)
 #pragma config(Sensor, dgtl7,  yellowLED,      sensorLEDtoVCC)
@@ -27,11 +27,11 @@
 
   Pseudocode:
 
-
 */
 
 task main()
 {                                     //Program begins, insert code within curly braces
+
 
 
 

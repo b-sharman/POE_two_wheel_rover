@@ -1,8 +1,7 @@
 #pragma config(Sensor, in1,    rightLineFollower, sensorLineFollower)
-#pragma config(Sensor, in2,    middleLineFollower, sensorLineFollower)
 #pragma config(Sensor, in3,    leftLineFollower, sensorLineFollower)
 #pragma config(Sensor, in4,    potentiometer,  sensorPotentiometer)
-#pragma config(Sensor, dgtl2,  sonarIn,        sensorSONAR_raw)
+#pragma config(Sensor, dgtl2,  sonarIn,        sensorSONAR_inch)
 #pragma config(Sensor, dgtl5,  pushButton,     sensorTouch)
 #pragma config(Sensor, dgtl6,  redLED,         sensorLEDtoVCC)
 #pragma config(Sensor, dgtl7,  yellowLED,      sensorLEDtoVCC)
@@ -23,9 +22,24 @@
 
 
   Task Description:
+  Have your TWR wait for the button to be pushed then turn on the green LED, drive forward
+  toward the wall unit it is 10 inches from the wall. Then turn off the green LED, stop and
+  turn on the red LED for 1 second. The red piece of tape is 10 inches from the wall. Your
+  TWR will be placed different distance from the wall each time. Hint: use the ultrasonic
+  sensor. This needs to be repeatable; you may be asked to run your program more than once.
 
 
   Pseudocode:
+  wait for button push
+  turn on green LED
+  turn on both motors
+  wait until sonarIn reads 10
+  turn off both motors
+  turn off the green LED
+  turn on the red LED
+  wait 1 second
+  turn off the red LED
+
 
 
 */
@@ -33,6 +47,17 @@
 task main()
 {                                     //Program begins, insert code within curly braces
 
-
-
+		while (true) {
+			untilTouch(pushButton);
+			turnLEDOn(greenLED);
+			startMotor(leftMotor, 50);
+			startMotor(rightMotor, 50);
+			untilSonarLessThan(10, sonarIn);
+			stopMotor(leftMotor);
+			stopMotor(rightMotor);
+			turnLEDOff(greenLED);
+			turnLEDOn(redLED);
+			wait(1);
+			turnLEDOff(redLED);
+	}
 }

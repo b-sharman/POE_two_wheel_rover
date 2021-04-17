@@ -23,16 +23,28 @@
 
 
   Task Description:
+  Use a while loop to program the rover to make the yellow LED blink. Turn on the
+  yellow LED for one second and then off for one second, repeat infinitely.
+
 
 
   Pseudocode:
-
+  turn on the yellow LED
+  wait 1 second
+  turn off the yellow LED
+  wait 1 second
+  repeat
 
 */
 
 task main()
 {                                     //Program begins, insert code within curly braces
 
-
+    while (true) {
+        turnLEDOn(yellowLED);
+        wait(1);
+        turnLEDOff(yellowLED);
+        wait(1);
+    }
 
 }
