@@ -24,7 +24,7 @@
 
   Task Description:
   Use a while loop to program the rover to make the yellow LED blink. Turn on the
-  yellow LED for one second and then off for one second, repeat infinitely.
+  yellow LED for one second and then off for one second; repeat infinitely.
 
 
 

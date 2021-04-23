@@ -58,7 +58,7 @@ task main()
     counter = 0;
     while (counter < 10) {
         turnLEDOn(greenLED);
-        wait(0.15);
+        wait(0.5);
         turnLEDOff(greenLED);
         wait(0.75);
         counter++;

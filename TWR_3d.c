@@ -23,13 +23,9 @@
 
 
   Task Description:
-  Place your TWR in the green start box and have it wait for the button to be
-  pushed then turn on the green LED, drive forward in a straight line, following
-  the blue tape line, for 3 seconds, stop, turn around 180°, drive back to the
-  green start box, stop, turn around 180°. Do this 3 times using variables. At
-  the end your TWR should stop back completely in the green start box and then
-  turn on the red LED for 1 second. This needs to be repeatable so you may be
-  asked to run your program more than once.
+  Start in the green box, drive forward for 3 seconds, turn around, and drive
+  back--thrice. (Use a loop to use the same code). Turn on the green LED while
+  driving and turn on the red LED for 1 second after stopping.
 
 
   Pseudocode:
@@ -37,43 +33,49 @@
   turn on green LED
   turn both motors on
   wait 3 seconds
-  turn both motors off
   turn motors on, but in opposite directions
-  wait 1.582 seconds
+  wait until the robot is facing the opposite way
   make the "backward" motor go forward at the same speed as the other motor
   wait 3 seconds
   repeat 180° turn
-  repeat the whole process twice more
+  repeat the whole process twice more, but switch which motor is reversed during the turn every time
 
 
 */
 
-//makes a turn at speed 50 and ends with both motors on in the same direction.
-task turnAround()
-{
-    startMotor(leftMotor, 50);
-    //reversing one of the motors should result in an in-place turn
-    startMotor(rightMotor, -50);
-    waitInMilliseconds(1582);
-    startMotor(rightMotor, 50);
+static const int speed = 50;
+
+//turn around the robot - change the order of the arguments to change the turn direction
+//the first motor specified will be the direction it turns
+void turn(int motor_a, int motor_b) {
+    startMotor(motor_b, -speed);
+    waitInMilliseconds(1804);
+    //now we go straight again
+    startMotor(motor_b, speed);
 }
 
 task main()
-{                                     //Program begins, insert code within curly braces
+{
     while (true) {
         untilTouch(pushButton);
         turnLEDOn(greenLED);
-        for (int i=0; i<=2; i++) {
-            startMotor(leftMotor, 50);
-            startMotor(rightMotor, 50);
+        startMotor(leftMotor, speed);
+        startMotor(rightMotor, speed);
+        //do the stuff in brackets 3 times
+        for (int i=0; i<=5; i++) {
             wait(3);
-            //presumably, the following two lines will have no effect
-            stopMotor(leftMotor);
-            stopMotor(rightMotor);
-            startTask(turnAround);
-            wait(3);
-            startTask(turnAround);
+            //reversing one of the motors should result in an in-place turn
+            //check if the remainder when dividing by 2 is 0 (in other words, if i is even or 0)
+            //if (i%2 == 0) {
+            if (true) {
+                turn(rightMotor, leftMotor);
+            }
+            else {
+                turn(leftMotor, rightMotor);
+            }
         }
+        stopMotor(leftMotor);
+        stopMotor(rightMotor);
         turnLEDOff(greenLED);
         turnLEDOn(redLED);
         wait(1);

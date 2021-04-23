@@ -56,11 +56,13 @@ task main()
         else {
             turnLEDOff(greenLED);
         }
-        if (SensorValue[potentiometer] <= 2500) {
+        if (SensorValue[potentiometer] < 2500) {
             turnLEDOn(yellowLED);
+            turnLEDOff(redLED);
         }
         else {
             turnLEDOff(yellowLED);
+            turnLEDOn(redLED);
         }
         waitInMilliseconds(50); //the procedure runs 1000/50=20 times per second
     }

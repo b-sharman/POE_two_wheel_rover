@@ -37,6 +37,7 @@
   turn on right motor
   wait 3 seconds
   turn off motors
+  turn off green LED
   turn on red LED
   wait 1 second
   turn off red LED
@@ -46,16 +47,6 @@
 
 
 */
-
-task end()
-{
-    stopMotor(rightMotor);
-    stopMotor(leftMotor);
-    turnLEDOff(greenLED);
-    turnLEDOn(redLED);
-    wait(1);
-    turnLEDOff(redLED);
-}
 
 task main()
 {                                     //Program begins, insert code within curly braces
@@ -73,10 +64,16 @@ task main()
     	  wait(3);
     	  //reversing one of the motors should result in an in-place turn
     	  startMotor(rightMotor, -50);
-    	  waitInMilliseconds(1582); //with timers, we have to shoot in the dark until it roughly works
+    	  waitInMilliseconds(1480); //with timers, we have to shoot in the dark until it roughly works
+    	  //untilRotations(-1.8, encoderRight);
     	  startMotor(rightMotor, 50);
     	  wait(3);
-    	  startTask(end);
+		    stopMotor(rightMotor);
+		    stopMotor(leftMotor);
+		    turnLEDOff(greenLED);
+		    turnLEDOn(redLED);
+		    wait(1);
+		    turnLEDOff(redLED);
     }
 
 }

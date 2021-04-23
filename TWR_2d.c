@@ -49,12 +49,24 @@
 
 */
 
+//static const int speedLeft = 58;
+//static const int speedRight = 62;
+static const int speedLeft = 120;
+static const int speedRight = 122;
+//static const int msStraight = 4058;
+//static const int msPerpendicular = 2015;
+//static const int msTurn = 1628;
+static const int msStraight = 2829;
+static const int msPerpendicular = 1508;
+static const int msTurn = 1114;
+
 //in-place turn right (goal is a quarter turn)
-task turnRight()
+void turnRight()
 {
-        startMotor(rightMotor, -60);
-        waitInMilliseconds(725);
-        startMotor(rightMotor, 60);
+        stopMotor(rightMotor);
+        waitInMilliseconds(msTurn);
+        //untilRotations(-0.9, encoderRight);
+        startMotor(rightMotor, speedRight);
 }
 
 task main()
@@ -62,23 +74,20 @@ task main()
 
     while (true) {
         untilTouch(pushButton);
-        turnFlashlightOn(flashlight);
+        turnFlashlightOn(flashlight, 127);
         //forward
         //it would be good to make constants for the power we give motors
         //that way, we only have to change two numbers if we want to change speed
-        startMotor(leftMotor, 60);
-        startMotor(rightMotor, 60);
-        //magic guessing number
-        waitInMilliseconds(5588);
-        //words of wisdom from your former self: MAKE SURE TASKS AREN'T ASYNCHRONOUS
-        //could I just use functions?
-        startTask(turnRight);
+        startMotor(leftMotor, speedLeft);
+        startMotor(rightMotor, speedRight);
+        waitInMilliseconds(msStraight);
+        turnRight();
         //turn finished: we should be perpendicular to the line
-        waitInMilliseconds(3333);
-        startTask(turnRight);
+        waitInMilliseconds(msPerpendicular);
+        turnRight();
         //turn finished: we should be parallel to the line
         //now travel forward until the TWR is in the red box
-        waitInMilliseconds(4488);
+        waitInMilliseconds(msStraight - 191); //weird negative surplus because reasons
         stopMotor(leftMotor);
         stopMotor(rightMotor);
         turnFlashlightOff(flashlight);

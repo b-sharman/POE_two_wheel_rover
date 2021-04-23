@@ -23,9 +23,8 @@
 
 
   Task Description:
-  Have your TWR wait for the button to be pushed. Then, turn on the green LED, drive
-  forward in a straight line for 3 seconds, turn off green LED, stop, and turn on the
-  red LED for 1 second.
+  When the button is pushed, drive forward for 3 seconds. When driving, turn the green
+  LED on; after stopping, turn the red LED on for one second.
 
 
   Pseudocode:
@@ -48,8 +47,8 @@ task main()
     untilTouch(pushButton);
     turnLEDOn(greenLED);
     //to go straight, both motors must be started
-    startMotor(leftMotor, 20);
-    startMotor(rightMotor, 20);
+    startMotor(leftMotor, 40);
+    startMotor(rightMotor, 41);
     wait(3);
     turnLEDOff(greenLED);
     stopMotor(leftMotor);
