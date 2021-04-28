@@ -24,7 +24,7 @@
 
   Task Description:
   Start in the green box, drive forward for 3 seconds, turn around, and drive
-  back--thrice. (Use a loop to use the same code). Turn on the green LED while
+  back - thrice. (Use a loop to use the same code). Turn on the green LED while
   driving and turn on the red LED for 1 second after stopping.
 
 
@@ -43,36 +43,25 @@
 
 */
 
-static const int speed = 50;
+static const int speedLeft = 50;
+static const int speedRight = 49;
+static const int turnTime = 1800;
 
-//turn around the robot - change the order of the arguments to change the turn direction
-//the first motor specified will be the direction it turns
-void turn(int motor_a, int motor_b) {
-    startMotor(motor_b, -speed);
-    waitInMilliseconds(1804);
-    //now we go straight again
-    startMotor(motor_b, speed);
-}
-
-task main()
-{
+task main() {
     while (true) {
         untilTouch(pushButton);
         turnLEDOn(greenLED);
-        startMotor(leftMotor, speed);
-        startMotor(rightMotor, speed);
+        waitInMilliseconds(888);
+        startMotor(leftMotor, speedLeft);
+        startMotor(rightMotor, speedRight);
         //do the stuff in brackets 3 times
         for (int i=0; i<=5; i++) {
             wait(3);
             //reversing one of the motors should result in an in-place turn
-            //check if the remainder when dividing by 2 is 0 (in other words, if i is even or 0)
-            //if (i%2 == 0) {
-            if (true) {
-                turn(rightMotor, leftMotor);
-            }
-            else {
-                turn(leftMotor, rightMotor);
-            }
+            startMotor(rightMotor, -speedRight);
+            waitInMilliseconds(turnTime);
+            //now we go straight again
+            startMotor(rightMotor, speedRight + (i%2));
         }
         stopMotor(leftMotor);
         stopMotor(rightMotor);
@@ -81,5 +70,4 @@ task main()
         wait(1);
         turnLEDOff(redLED);
     }
-
 }
