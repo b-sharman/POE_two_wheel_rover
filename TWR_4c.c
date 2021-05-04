@@ -23,33 +23,35 @@
 
 
   Task Description:
-  After a button push, drive forward until the wheels have rotated around once. Calculate
-  the distance traveled.
+  After a button push, drive forward for exactly 2 feet. Turn on the green LED while driving;
+  turn on the red LED for one second after stopping.
 
 
   Pseudocode:
   wait for button push
-  start both motors
-  continually check one of the encoders;
-  when it reaches a certain value, stop both motors
-  measure radius of a wheel; multiply by tau for circumference
+  start motors
+  count encoders until 2 feet have gone by
+  stop motors
 
 
 */
 
+//circumference in inches
+//pi*d
+static const float circumference = 3.1415927*2.75;
+
 task main()
 {                                     //Program begins, insert code within curly braces
-
 	while (true)
 	{
 		untilTouch(pushButton);
-		wait(0.5);
-		startMotor(leftMotor, 50);
-		startMotor(rightMotor, 49);
-		untilEncoderCounts(360, encoderLeft);
+		startMotor(leftMotor, 120);
+		startMotor(rightMotor, 119);
+		//360 encoder counts per revolution
+		//1 revolution per circumference length gone forward
+		//24 inches in 2 feet
+		untilEncoderCounts(360*24/circumference, encoderLeft);
 		stopMotor(leftMotor);
 		stopMotor(rightMotor);
-		//will have gone 2*pi*radius of wheel
 	}
-
 }

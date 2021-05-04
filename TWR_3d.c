@@ -45,7 +45,7 @@
 
 static const int speedLeft = 50;
 static const int speedRight = 49;
-static const int turnTime = 1800;
+static const int turnTime = 1760;
 
 task main() {
     while (true) {
@@ -61,6 +61,7 @@ task main() {
             startMotor(rightMotor, -speedRight);
             waitInMilliseconds(turnTime);
             //now we go straight again
+            //% is modulus operator; it adds one every other loop
             startMotor(rightMotor, speedRight + (i%2));
         }
         stopMotor(leftMotor);
