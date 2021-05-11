@@ -59,17 +59,19 @@ static const int speedRight = 121;
 task flash()
 {
 	turnLEDOn(yellowLED);
-	waitInMilliseconds(300);
+	waitInMilliseconds(200);
 	turnLEDOff(yellowLED);
 }
 
 //in-place turn right (goal is a quarter turn)
 void turnRight()
 {
-	//stopMotor(rightMotor);
+	startTask(flash);
 	startMotor(rightMotor, -speedRight);
-	untilEncoderCounts(-360*0.0216/circumference, encoderRight);
+	untilEncoderCounts(-360*7.67/circumference, encoderRight);
 	startMotor(rightMotor, speedRight);
+	//debugging: flash the yellow LED every time there is a turn
+	startTask(flash);
 }
 
 task main()
@@ -83,6 +85,7 @@ task main()
 		//that way, we only have to change two numbers if we want to change speed
 		startMotor(leftMotor, speedLeft);
 		startMotor(rightMotor, speedRight);
+		//should be 360*number of inches/circumference
 		untilEncoderCounts(360*48/circumference, encoderLeft);
 		turnRight();
 		//turn finished: we should be perpendicular to the line
